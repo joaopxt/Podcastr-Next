@@ -38,6 +38,7 @@ export default function Episode({ episode }: EpisodeProps) {
    const {play} = useContext(PlayerContext) 
    
     return (
+       <div className={styles.wrapper}>
         <div className={styles.episode}>
            <Head>
         <title>{episode.title} | Podcastr</title>
@@ -63,13 +64,20 @@ export default function Episode({ episode }: EpisodeProps) {
             <div className={styles.description}
             dangerouslySetInnerHTML={{ __html: episode.description }} />
                 
-        </div>
+            </div>
+            </div>
     )
 }
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
     const { slug } = ctx.params;
-    const { data } = await api.get(`/episodes/${slug}`)
+   // const { data } = await api.get(`/episodes/${slug}`)
+    let data = require("../../../server.js");
+  data.episodes.map((ep: Episode) => {
+    if (slug === ep.id) {
+      data = ep;
+    }
+  });
     const episode = {
       id: data.id,
       title: data.title,

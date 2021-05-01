@@ -1,4 +1,4 @@
-{
+module.exports={
   "episodes": [
     {
       "id": "a-importancia-da-contribuicao-em-open-source",      
